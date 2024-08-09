@@ -2,3 +2,5 @@
 .vscode/
 database/
 **/__pycache__/
+setup.py
+alembic.ini

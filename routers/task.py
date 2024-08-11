@@ -31,12 +31,10 @@ def read_tasks_by_status(status: str, db: Session = Depends(get_db)):
     return tasks
 
 
-@router.get("/show/{task_id}", response_class=HTMLResponse)
-def read_task_form(task_id: int, request: Request, db: Session = Depends(get_db)):
+@router.get("/show/{task_id}", response_model=schemas.Task)
+def read_task(task_id: int, db: Session = Depends(get_db)):
     task = db.query(models.Task).filter(models.Task.id == task_id).first()
-    validated_task = schemas.Task.model_validate(task)
-    dumped_task = validated_task.model_dump()
-    return templates.TemplateResponse(request=request, name="task_form.jinja", context=dumped_task)
+    return task
 
 
 @router.post("/create", response_model=schemas.Task)

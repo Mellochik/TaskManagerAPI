@@ -12,7 +12,7 @@ class TaskBase(BaseModel):
 class TaskCreate(TaskBase):
     description: str
     priority_id: int
-    status_id: int
+    status_id: int = 1
     labels_id: list[int]
 
 
